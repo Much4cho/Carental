@@ -14,9 +14,6 @@ namespace Carental.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<Renter>()
-            //    .Property(e => e.Id)
-            //    .UseIdentityColumn
         }
     }
 }
