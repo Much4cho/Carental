@@ -6,6 +6,6 @@ namespace Carental.DataAccess.Entities
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }
-        public virtual List<Car>? Cars { get; internal set; }
+        public virtual List<Car>? Cars { get; set; }
     }
 }

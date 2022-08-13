@@ -34,6 +34,8 @@ namespace Carental.DataAccess
                 {
                     Manufacturer = "Toyota",
                     Model = "Yaris",
+                    PlateNumber = "KR12345",
+                    Color = "Red",
                     PricePerMinute = 0.15m,
                     PricePerKilometer = 1.29m,
                     ParkedPricePerMinute = .10m,
@@ -43,6 +45,8 @@ namespace Carental.DataAccess
                 {
                     Manufacturer = "Toyota",
                     Model = "i20",
+                    PlateNumber = "KR5943",
+                    Color = "Green",
                     PricePerMinute = 0.15m,
                     PricePerKilometer = 1.29m,
                     ParkedPricePerMinute = .10m,
@@ -52,6 +56,8 @@ namespace Carental.DataAccess
                 {
                     Manufacturer = "Toyota",
                     Model = "Yaris",
+                    PlateNumber = "KR5924",
+                    Color = "Red",
                     PricePerMinute = 0.15m,
                     PricePerKilometer = 1.29m,
                     ParkedPricePerMinute = .10m,

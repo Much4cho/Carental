@@ -3,6 +3,7 @@ using Carental.BusinessLogic.Services.Interfaces;
 using Carental.DataAccess;
 using Carental.DataAccess.Repositories;
 using Carental.DataAccess.Repositories.Interfaces;
+using Carental.WebApi.Swagger;
 using Microsoft.EntityFrameworkCore;
 
 namespace Carental.WebApi
@@ -23,16 +24,21 @@ namespace Carental.WebApi
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddScoped<ICarRepository, CarRepository>();
+            builder.Services.AddScoped<IRentalRepository, RentalRepository>();
             builder.Services.AddScoped<IRenterRepository, RenterRepository>();
 
             builder.Services.AddScoped<ICarService, CarService>();
+            builder.Services.AddScoped<IRentalService, RentalService>();
             builder.Services.AddScoped<IRenterService, RenterService>();
  
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                //options.DocumentFilter<RemoveSchemasFilter>();
+            });
             
 
             var app = builder.Build();
@@ -41,7 +47,10 @@ namespace Carental.WebApi
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(options =>
+                {
+                    options.DefaultModelsExpandDepth(-1);
+                });
             }
 
             app.UseHttpsRedirection();

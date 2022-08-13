@@ -26,17 +26,37 @@ namespace Carental.DataAccess.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Manufacturer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ModelYear")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("ParkedPricePerMinute")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PlateNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("PricePerKilometer")
                         .HasPrecision(18, 2)
@@ -53,7 +73,40 @@ namespace Carental.DataAccess.Migrations
 
                     b.HasIndex("RenterId");
 
-                    b.ToTable("Car");
+                    b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("Carental.DataAccess.Entities.Rental", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<Guid>("CarId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RentedOnUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ReturnedOnUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("Rentals");
                 });
 
             modelBuilder.Entity("Carental.DataAccess.Entities.Renter", b =>
@@ -64,6 +117,7 @@ namespace Carental.DataAccess.Migrations
                         .HasDefaultValueSql("newsequentialid()");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -80,6 +134,17 @@ namespace Carental.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Renter");
+                });
+
+            modelBuilder.Entity("Carental.DataAccess.Entities.Rental", b =>
+                {
+                    b.HasOne("Carental.DataAccess.Entities.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
                 });
 
             modelBuilder.Entity("Carental.DataAccess.Entities.Renter", b =>
