@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Carental.DataAccess.Migrations
 {
     [DbContext(typeof(CarentalContext))]
-    [Migration("20220806132405_InitialMigration")]
+    [Migration("20220813070427_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
