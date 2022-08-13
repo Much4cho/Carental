@@ -1,4 +1,5 @@
 ﻿using Carental.BusinessLogic.Models;
+using Carental.BusinessLogic.Services;
 using Carental.BusinessLogic.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,10 +26,22 @@ namespace Carental.WebApi.Controllers.Renters
             return _renterService.GetAll();
         }
 
+        [HttpGet("{id}")]
+        public RenterModel Get(Guid id)
+        {
+            return _renterService.GetById(id);
+        }
+
         [HttpPost]
         public void Add(RenterModel renter)
         {
             _renterService.Add(renter);
+        }
+
+        [HttpPut("{id}")]
+        public void Update(Guid id, [FromBody] RenterModel renter)
+        {
+            _renterService.Update(id, renter);
         }
     }
 }

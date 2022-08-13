@@ -25,10 +25,22 @@ namespace Carental.WebApi.Controllers.Cars
             return _carService.GetAll();
         }
 
+        [HttpGet("{id}")]
+        public CarModel Get(Guid id)
+        {
+            return _carService.GetById(id);
+        }
+
         [HttpPost]
-        public void Add(CarModel car)
+        public void Add([FromBody]CarModel car)
         {
             _carService.Add(car);
+        }
+
+        [HttpPut("{id}")]
+        public void Update(Guid id, [FromBody] CarModel car)
+        {
+            _carService.Update(id, car);
         }
     }
 }

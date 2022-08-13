@@ -26,6 +26,11 @@ namespace Carental.BusinessLogic.Services
             var cars = _carRepository.GetAll();
             return _mapper.Map<IEnumerable<CarModel>>(cars);
         }
+        public CarModel GetById(Guid id)
+        {
+            var car = _carRepository.GetById(id);
+            return _mapper.Map<CarModel>(car);
+        }
         public void Add(CarModel carModel)
         {
             var car = _mapper.Map<Car>(carModel);
@@ -33,6 +38,12 @@ namespace Carental.BusinessLogic.Services
             _unitOfWork.Save();
         }
 
-        
+        public void Update(Guid id, CarModel carModel)
+        {
+            var car = _mapper.Map<Car>(carModel);
+            car.Id = id;
+            _carRepository.Update(car);
+            _unitOfWork.Save();
+        }
     }
 }

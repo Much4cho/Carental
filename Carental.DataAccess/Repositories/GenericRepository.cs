@@ -12,6 +12,7 @@ namespace Carental.DataAccess.Repositories
             CarentalContext = carentalContext;
         }
         public IQueryable<T> GetAll() => CarentalContext.Set<T>().AsNoTracking();
+        public T? GetById(Guid id) => CarentalContext.Set<T>().Find(id);
         public IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression) =>
             CarentalContext.Set<T>().Where(expression).AsNoTracking();
         public void Add(T entity) => CarentalContext.Set<T>().Add(entity);

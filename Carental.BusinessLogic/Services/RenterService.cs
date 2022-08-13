@@ -28,10 +28,24 @@ namespace Carental.BusinessLogic.Services
             return _mapper.Map<IEnumerable<RenterModel>>(renters);
         }
 
+        public RenterModel GetById(Guid id)
+        {
+            var renter = _renterRepository.GetById(id);
+            return _mapper.Map<RenterModel>(renter);
+        }
+
         public void Add(RenterModel renterModel)
         {
             var renter = _mapper.Map<Renter>(renterModel);
             _renterRepository.Add(renter);
+            _unitOfWork.Save();
+        }
+
+        public void Update(Guid id, RenterModel renterModel)
+        {
+            var renter = _mapper.Map<Renter>(renterModel);
+            renter.Id = id;
+            _renterRepository.Update(renter);
             _unitOfWork.Save();
         }
     }
