@@ -2,7 +2,7 @@
 
 namespace Carental.DataAccess.Repositories.Interfaces
 {
-    public interface IRenterRepository : IRepositoryBase<Renter>
+    public interface IRenterRepository : IGenericRepository<Renter>
     {
     }
 }

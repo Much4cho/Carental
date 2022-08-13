@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Carental.BusinessLogic.Models;
 using Carental.BusinessLogic.Services.Interfaces;
+using Carental.DataAccess;
 using Carental.DataAccess.Entities;
 using Carental.DataAccess.Repositories.Interfaces;
 
@@ -9,12 +10,15 @@ namespace Carental.BusinessLogic.Services
     public class RenterService : IRenterService
     {
         private readonly IMapper _mapper;
-        private readonly IRepositoryBase<Renter> _renterRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IGenericRepository<Renter> _renterRepository;
         public RenterService(
             IMapper mapper,
-            IRepositoryBase<Renter> renterRepository)
+            IUnitOfWork unitOfWork,
+            IGenericRepository<Renter> renterRepository)
         {
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
             _renterRepository = renterRepository;
         }
 
@@ -22,6 +26,13 @@ namespace Carental.BusinessLogic.Services
         {
             var renters = _renterRepository.GetAll();
             return _mapper.Map<IEnumerable<RenterModel>>(renters);
+        }
+
+        public void Add(RenterModel renterModel)
+        {
+            var renter = _mapper.Map<Renter>(renterModel);
+            _renterRepository.Add(renter);
+            _unitOfWork.Save();
         }
     }
 }

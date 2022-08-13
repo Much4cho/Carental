@@ -15,6 +15,9 @@ namespace Carental.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Renter>()
+                .Property(x => x.Id).HasDefaultValueSql("newsequentialid()");
         }
     }
 }

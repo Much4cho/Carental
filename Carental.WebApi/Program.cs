@@ -21,8 +21,9 @@ namespace Carental.WebApi
             builder.Services.AddDbContext<CarentalContext>(opt =>
                 opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            builder.Services.AddScoped<IRepositoryBase<Renter>, RenterRepository>();
+            builder.Services.AddScoped<IGenericRepository<Renter>, RenterRepository>();
             //builder.Services.AddScoped<IRepositoryBase<Renter>, RepositoryBase<Renter>>();
             builder.Services.AddScoped<IRenterService, RenterService>();
 

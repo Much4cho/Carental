@@ -24,5 +24,11 @@ namespace Carental.WebApi.Controllers.Renter
         {
             return _renterService.GetAll();
         }
+
+        [HttpPost]
+        public void Add(RenterModel renter)
+        {
+            _renterService.Add(renter);
+        }
     }
 }

@@ -4,10 +4,10 @@ using System.Linq.Expressions;
 
 namespace Carental.DataAccess.Repositories
 {
-    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected CarentalContext CarentalContext { get; set; }
-        public RepositoryBase(CarentalContext carentalContext)
+        public GenericRepository(CarentalContext carentalContext)
         {
             CarentalContext = carentalContext;
         }

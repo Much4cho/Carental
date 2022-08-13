@@ -2,7 +2,7 @@
 
 namespace Carental.DataAccess.Repositories.Interfaces
 {
-    public interface IRepositoryBase<T>
+    public interface IGenericRepository<T>
     {
         IQueryable<T> GetAll();
         IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression);
