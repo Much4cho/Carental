@@ -3,9 +3,9 @@ using Carental.DataAccess.Repositories.Interfaces;
 
 namespace Carental.DataAccess.Repositories
 {
-    public class RenterRepository : GenericRepository<Renter>, IRenterRepository
+    public class CarRepository : GenericRepository<Car>, ICarRepository
     {
-        public RenterRepository(CarentalContext carentalContext) : base(carentalContext)
+        public CarRepository(CarentalContext carentalContext) : base(carentalContext)
         {
         }
     }

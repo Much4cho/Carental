@@ -2,17 +2,17 @@
 using Carental.BusinessLogic.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Carental.WebApi.Controllers.Renter
+namespace Carental.WebApi.Controllers.Renters
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RenterController : ControllerBase
+    public class RentersController : ControllerBase
     {
-        private readonly ILogger<RenterController> _logger;
+        private readonly ILogger<RentersController> _logger;
         private readonly IRenterService _renterService;
 
-        public RenterController(
-            ILogger<RenterController> logger,
+        public RentersController(
+            ILogger<RentersController> logger,
             IRenterService renterService)
         {
             _logger = logger;

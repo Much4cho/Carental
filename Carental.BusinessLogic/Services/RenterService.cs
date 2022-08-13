@@ -11,11 +11,11 @@ namespace Carental.BusinessLogic.Services
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IGenericRepository<Renter> _renterRepository;
+        private readonly IRenterRepository _renterRepository;
         public RenterService(
             IMapper mapper,
             IUnitOfWork unitOfWork,
-            IGenericRepository<Renter> renterRepository)
+            IRenterRepository renterRepository)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;

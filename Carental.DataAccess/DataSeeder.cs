@@ -2,6 +2,7 @@
 
 namespace Carental.DataAccess
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CS8604:Possible null reference argument", Justification = "Not production code.")]
     public class DataSeeder
     {
         private readonly CarentalContext _context;
@@ -11,7 +12,7 @@ namespace Carental.DataAccess
         public void Seed()
         {
             _context.Database.EnsureCreated();
-            if (_context.Renters.Any()) return;
+            if (_context.Renters?.Any() ?? true) return;
 
             var renters = new List<Renter>
             {
@@ -27,7 +28,39 @@ namespace Carental.DataAccess
                 },
             };
 
+            var cars = new List<Car>
+            {
+                new Car
+                {
+                    Manufacturer = "Toyota",
+                    Model = "Yaris",
+                    PricePerMinute = 0.15m,
+                    PricePerKilometer = 1.29m,
+                    ParkedPricePerMinute = .10m,
+                    RenterId = renters[0].Id,
+                },
+                new Car
+                {
+                    Manufacturer = "Toyota",
+                    Model = "i20",
+                    PricePerMinute = 0.15m,
+                    PricePerKilometer = 1.29m,
+                    ParkedPricePerMinute = .10m,
+                    RenterId = renters[0].Id,
+                },
+                new Car
+                {
+                    Manufacturer = "Toyota",
+                    Model = "Yaris",
+                    PricePerMinute = 0.15m,
+                    PricePerKilometer = 1.29m,
+                    ParkedPricePerMinute = .10m,
+                    RenterId = renters[1].Id,
+                },
+            };
+
             _context.AddRange(renters);
+            _context.AddRange(cars);
             _context.SaveChanges();
         }
     }

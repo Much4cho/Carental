@@ -1,7 +1,6 @@
 using Carental.BusinessLogic.Services;
 using Carental.BusinessLogic.Services.Interfaces;
 using Carental.DataAccess;
-using Carental.DataAccess.Entities;
 using Carental.DataAccess.Repositories;
 using Carental.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -23,9 +22,12 @@ namespace Carental.WebApi
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            builder.Services.AddScoped<IGenericRepository<Renter>, RenterRepository>();
-            //builder.Services.AddScoped<IRepositoryBase<Renter>, RepositoryBase<Renter>>();
+            builder.Services.AddScoped<ICarRepository, CarRepository>();
+            builder.Services.AddScoped<IRenterRepository, RenterRepository>();
+
+            builder.Services.AddScoped<ICarService, CarService>();
             builder.Services.AddScoped<IRenterService, RenterService>();
+ 
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

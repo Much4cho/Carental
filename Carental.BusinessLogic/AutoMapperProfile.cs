@@ -8,6 +8,7 @@ namespace Carental.BusinessLogic
     {
         public AutoMapperProfile()
         {
+            CreateMap<Car, CarModel>().ReverseMap();
             CreateMap<Renter, RenterModel>().ReverseMap();
         }
     }

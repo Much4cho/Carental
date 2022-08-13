@@ -16,8 +16,14 @@ namespace Carental.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Renter>()
-                .Property(x => x.Id).HasDefaultValueSql("newsequentialid()");
+            var car = modelBuilder.Entity<Car>();
+            car.Property(e => e.RenterId).IsRequired();
+            car.Property(e => e.PricePerMinute).HasPrecision(18, 2);
+            car.Property(e => e.PricePerKilometer).HasPrecision(18, 2);
+            car.Property(e => e.ParkedPricePerMinute).HasPrecision(18, 2);
+
+            var renter = modelBuilder.Entity<Renter>();
+            renter.Property(e => e.Id).HasDefaultValueSql("newsequentialid()");
         }
     }
 }
