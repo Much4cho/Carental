@@ -40,6 +40,11 @@ namespace Carental.DataAccess
                     PricePerKilometer = 1.29m,
                     ParkedPricePerMinute = .10m,
                     RenterId = renters[0].Id,
+                    Location = new Location
+                    {
+                        Latitude = 50.076817091348104m,
+                        Longitude = 19.927420077832387m
+                    }
                 },
                 new Car
                 {
@@ -51,6 +56,11 @@ namespace Carental.DataAccess
                     PricePerKilometer = 1.29m,
                     ParkedPricePerMinute = .10m,
                     RenterId = renters[0].Id,
+                    Location = new Location
+                    {
+                        Latitude = 50.06927255958391m,
+                        Longitude = 19.93786556055238m
+                    }
                 },
                 new Car
                 {
@@ -62,6 +72,11 @@ namespace Carental.DataAccess
                     PricePerKilometer = 1.29m,
                     ParkedPricePerMinute = .10m,
                     RenterId = renters[1].Id,
+                    Location = new Location
+                    {
+                        Latitude = 50.05430914618797m,
+                        Longitude = 19.935709604938097m
+                    }
                 },
             };
 

@@ -11,5 +11,6 @@ namespace Carental.BusinessLogic.Models
         public decimal PricePerMinute { get; set; }
         public decimal PricePerKilometer { get; set; }
         public decimal ParkedPricePerMinute { get; set; }
+        public Location? Location { get; set; }
     }
 }

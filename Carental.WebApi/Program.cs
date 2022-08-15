@@ -17,6 +17,16 @@ namespace Carental.WebApi
 
             // Add services to the container.
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            });
 
             builder.Services.AddDbContext<CarentalContext>(opt =>
                 opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
@@ -54,6 +64,8 @@ namespace Carental.WebApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(); ;
 
             app.UseAuthorization();
 
