@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Carental.DataAccess.Entities
+﻿namespace Carental.DataAccess.Entities
 {
     public class Location
     {

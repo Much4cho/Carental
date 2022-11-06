@@ -24,7 +24,7 @@ namespace Carental.DataAccess
                 new Renter
                 {
                     Id = Guid.NewGuid(),
-                    Name = "Test"
+                    Name = "Gocar"
                 },
             };
 

@@ -1,4 +1,4 @@
-﻿using Carental.DataAccess.Entities;
+using Carental.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Carental.DataAccess
@@ -18,6 +18,8 @@ namespace Carental.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Owned<Location>();
+
             modelBuilder.Entity<Car>(car =>
             {
                 car.Property(e => e.Id).HasDefaultValueSql("newsequentialid()");
@@ -25,9 +27,6 @@ namespace Carental.DataAccess
                 car.Property(e => e.Model).IsRequired();
                 car.Property(e => e.Color).IsRequired();
                 car.Property(e => e.PlateNumber).IsRequired();
-                //car.Property(e => e.PricePerMinute).HasPrecision(18, 2);
-                //car.Property(e => e.PricePerKilometer).HasPrecision(18, 2);
-                //car.Property(e => e.ParkedPricePerMinute).HasPrecision(18, 2);
                 car.OwnsOne(e => e.Location,
                     car =>
                     {
@@ -40,7 +39,12 @@ namespace Carental.DataAccess
             modelBuilder.Entity<Rental>(rental =>
             {
                 rental.Property(e => e.Id).HasDefaultValueSql("newsequentialid()");
-                //rental.Property(e => e.TotalPrice).HasPrecision(18, 2);
+                rental.OwnsOne(e => e.LastLocation,
+                    rental =>
+                    {
+                        rental.Property(e => e.Latitude).HasPrecision(18, 15);
+                        rental.Property(e => e.Longitude).HasPrecision(18, 15);
+                    });
             });
             
 
