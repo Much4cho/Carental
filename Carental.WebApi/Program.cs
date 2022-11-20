@@ -1,10 +1,10 @@
-using Carental.BusinessLogic.Services;
-using Carental.BusinessLogic.Services.Interfaces;
+using Carental.BusinessLogic;
 using Carental.DataAccess;
-using Carental.DataAccess.Repositories;
-using Carental.DataAccess.Repositories.Interfaces;
-using Carental.WebApi.Swagger;
+using Carental.WebApi.App_Start;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using System.Text;
 
 namespace Carental.WebApi
 {
@@ -15,33 +15,27 @@ namespace Carental.WebApi
             var builder = WebApplication.CreateBuilder(args);
             var configuration = builder.Configuration;
 
-            // Add services to the container.
 
-            builder.Services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(policy =>
-                {
-                    policy
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
-                });
-            });
+            builder.Services.ConfigureCors();
+
+            //builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<CarentalContext>();
+
+            //builder.Services.AddIdentityServer()
+            //    .AddApiAuthorization<ApplicationUser, CarentalContext>();
+
+            //builder.Services.AddAuthentication()
+            //    .AddIdentityServerJwt();
 
             builder.Services.AddDbContext<CarentalContext>(opt =>
                 opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+            //builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            builder.Services.AddScoped<ICarRepository, CarRepository>();
-            builder.Services.AddScoped<IRentalRepository, RentalRepository>();
-            builder.Services.AddScoped<IRenterRepository, RenterRepository>();
-
-            builder.Services.AddScoped<ICarService, CarService>();
-            builder.Services.AddScoped<IRentalService, RentalService>();
-            builder.Services.AddScoped<IRenterService, RenterService>();
+            builder.Services.ConfigureRepositories();
+            builder.Services.ConfigureBussinessServices();
  
-
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -49,7 +43,6 @@ namespace Carental.WebApi
             {
                 //options.DocumentFilter<RemoveSchemasFilter>();
             });
-            
 
             var app = builder.Build();
 
@@ -63,10 +56,25 @@ namespace Carental.WebApi
                 });
             }
 
+            //var OAuthOptions = new OAuthAuthorizationServerOptions
+            //{
+            //    TokenEndpointPath = new PathString("/Token"),
+            //    Provider = new ApplicationOAuthProvider(PublicClientId),
+            //    AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
+            //    AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+            //    // Note: Remove the following line before you deploy to production:
+            //    AllowInsecureHttp = true
+            //};
+
+            //// Enable the application to use bearer tokens to authenticate users
+            //app.UseOAuthBearerTokens(OAuthOptions);
+
             app.UseHttpsRedirection();
 
             app.UseCors(); ;
 
+            //app.UseAuthentication();
+            //app.UseIdentityServer();
             app.UseAuthorization();
 
 

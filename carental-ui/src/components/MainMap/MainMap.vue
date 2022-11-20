@@ -2,7 +2,7 @@
   import { computed, onBeforeMount, onMounted } from 'vue'
   import { Loader } from '@googlemaps/js-api-loader';
   import { useGeolocation } from './geolocation';
-import axios from 'axios';
+  import axios from 'axios';
 
   const GOOGLE_MAPS_API_KEY = "AIzaSyC4pD3y4njWMkTBJ3otX3h5Yp5gvayxoHQ";
 
@@ -47,8 +47,9 @@ import axios from 'axios';
             zoom: 13
           }),
           100);
-
-        cars.forEach(car => {
+        
+        // BUG: sometimes cars are not ready for the map, how to fix?
+        cars.forEach((car: Car) => {
         setTimeout(() => 
           new google.maps.Marker({
             position: {

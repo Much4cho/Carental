@@ -1,4 +1,4 @@
-using Carental.DataAccess.Entities;
+﻿using Carental.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Carental.DataAccess
@@ -13,6 +13,7 @@ namespace Carental.DataAccess
         public DbSet<Car>? Cars { get; set; }
         public DbSet<Rental>? Rentals { get; set; }
         public DbSet<Renter>? Renters { get; set; }
+        //public DbSet<User>? Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -54,6 +55,11 @@ namespace Carental.DataAccess
                 renter.Property(e => e.Name).IsRequired();
             });
 
+            //modelBuilder.Entity<User>(user =>
+            //{
+            //    user.Property(e => e.Id).HasDefaultValueSql("newsequentialid()");
+            //    user.Property(e => e.Name).IsRequired();
+            //});
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
